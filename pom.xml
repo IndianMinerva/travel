@@ -118,7 +118,12 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>4.0.3</version>
+                <version>7.0.0</version>
+                <configuration>
+                    <url>jdbc:mysql://localhost:3306/arun</url>
+                    <user>root</user>
+                    <password>password</password>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>

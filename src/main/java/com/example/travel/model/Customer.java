@@ -16,7 +16,7 @@ import java.util.Date;
 @Builder
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "first_name")
@@ -25,6 +25,6 @@ public class Customer {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "birth_date")
+    @Column(name = "dob")
     private Date dateOfBirth;
 }

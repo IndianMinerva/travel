@@ -4,3 +4,6 @@ CREATE TABLE customer(
 	last_name VARCHAR(20),
 	dob DATE
 );
+
+CREATE TABLE customer_seq(next_val INT);
+insert into customer_seq values(1);

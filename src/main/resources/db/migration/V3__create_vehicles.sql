@@ -8,3 +8,6 @@ CREATE TABLE vehicle(
 	CONSTRAINT fk_brand_id FOREIGN KEY(brand_id) REFERENCES brand(id),
 	CONSTRAINT fk_model_id FOREIGN KEY(model_id) REFERENCES model(id)
 );
+
+CREATE TABLE vehicle_seq(next_val INT);
+insert into vehicle_seq values(1);

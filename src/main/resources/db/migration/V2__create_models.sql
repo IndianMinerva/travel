@@ -1,4 +1,3 @@
 CREATE TABLE model(id INT PRIMARY KEY, name VARCHAR(20) UNIQUE);
-
-INSERT INTO model VALUES(0, 'S-class');
-INSERT INTO model VALUES(1, 'X-class');
+CREATE TABLE model_seq(next_val INT);
+insert into model_seq values(1);

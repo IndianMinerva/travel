@@ -1,4 +1,3 @@
 CREATE TABLE brand(id INT PRIMARY KEY, name VARCHAR(20) UNIQUE);
-
-INSERT INTO brand VALUES(0, 'Mercedes');
-INSERT INTO brand VALUES(1, 'Benz');
+CREATE TABLE brand_seq(next_val INT);
+insert into brand_seq values(1);

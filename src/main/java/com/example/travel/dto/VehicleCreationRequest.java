@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class VehicleCreationRequest {
-    private Long id;
     private String brandName;
     private String modelName;
     private int year;

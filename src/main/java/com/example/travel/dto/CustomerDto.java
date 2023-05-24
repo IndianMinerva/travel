@@ -11,7 +11,10 @@ import java.util.Date;
 @Getter
 public class CustomerDto {
     private Long Id;
+
     private String firstName;
+
     private String lastName;
+
     private Date dob;
 }

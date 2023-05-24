@@ -34,7 +34,6 @@ public class VehicleServiceImpl implements VehicleService {
 
         Vehicle.VehicleBuilder vehicleBuilder = Vehicle
                 .builder()
-                .id(vehicleCreationRequest.getId())
                 .brand(brand)
                 .model(model)
                 .year(vehicleCreationRequest.getYear())

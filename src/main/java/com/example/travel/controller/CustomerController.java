@@ -1,22 +1,24 @@
 package com.example.travel.controller;
 
+import com.example.travel.dto.CustomerCreationRequest;
 import com.example.travel.dto.CustomerDto;
 import com.example.travel.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/models")
+@RequestMapping("/customers‚‚‚‚‚")
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
 
     @PostMapping
-    public CustomerDto createCustomer(CustomerDto customerDto) {
-        return customerService.createOrUpdateCustomer(customerDto);
+    public CustomerDto createCustomer(@RequestBody @Validated CustomerCreationRequest customerCreationRequest) {
+        return customerService.createOrUpdateCustomer(customerCreationRequest);
     }
 
     @PutMapping("/{id}")

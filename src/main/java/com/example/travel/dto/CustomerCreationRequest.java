@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-public class VehicleDTO {
-
+public class CustomerCreationRequest {
     private Long id;
-    private BrandDto brandDto;
-    private ModelDto modelDto;
+    private String firstName;
+    private String lastName;
+    private String dob;
 }

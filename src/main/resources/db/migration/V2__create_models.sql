@@ -1,0 +1,4 @@
+CREATE TABLE model(id INT PRIMARY KEY, name VARCHAR(20) UNIQUE);
+
+INSERT INTO model VALUE(0, 'S-class')
+INSERT INTO model VALUE(1, 'X-class')

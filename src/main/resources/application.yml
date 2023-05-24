@@ -5,6 +5,14 @@ spring:
     username: root
     password: password
   jpa:
-    hibernate.ddl-auto: update
+    #hibernate.ddl-auto: update
     #generate-ddl: true
     show-sql: true
+  flyway:
+    user: root
+    password: password
+    schemas: arun
+    url: jdbc:mysql://localhost:3306/arun
+    locations: filesystem:db/migration
+    baseline-on-migrate: true
+    create-schemas: true

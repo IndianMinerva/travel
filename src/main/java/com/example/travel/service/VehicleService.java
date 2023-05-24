@@ -1,17 +1,17 @@
 package com.example.travel.service;
 
 import com.example.travel.dto.VehicleCreationRequest;
-import com.example.travel.dto.VehicleDTO;
+import com.example.travel.dto.VehicleDto;
 
 import java.util.List;
 
 public interface VehicleService {
-    VehicleDTO creteVehicle(VehicleCreationRequest vehicleCreationRequest);
+    VehicleDto creteVehicle(VehicleCreationRequest vehicleCreationRequest);
 
 
-    VehicleDTO getVehicle(Long id);
+    VehicleDto getVehicle(Long id);
 
-    List<VehicleDTO> getAllVehicles(); //Need to pagenate
+    List<VehicleDto> getAllVehicles(); //Need to pagenate
 
 
 }

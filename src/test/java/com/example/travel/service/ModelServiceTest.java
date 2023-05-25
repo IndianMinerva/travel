@@ -1,7 +1,7 @@
 package com.example.travel.service;
 
-import com.example.travel.dto.BrandDto;
-import com.example.travel.repository.BrandRepository;
+import com.example.travel.dto.ModelDto;
+import com.example.travel.repository.ModelRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,45 +20,45 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
 @SpringBootTest
-public class BrandServiceTest {
+public class ModelServiceTest {
 
     @Container
     public static MySQLContainer mySQLContainer = new MySQLContainer<>(DockerImageName.parse("mysql:8.0-debian"))
             .withReuse(true);
     @Autowired
-    private BrandService brandService;
+    private ModelService modelService;
 
     @Autowired
-    private BrandRepository brandRepository;
+    private ModelRepository modelRepository;
 
     @Test
-    public void givenBrands_should_returnTheBrands() {
+    public void givenModels_should_returnTheModels() {
         //Given
-        brandService.getOrCreateBrand("BMW");
-        brandService.getOrCreateBrand("Audi");
+        modelService.getOrCreateModel("S1");
+        modelService.getOrCreateModel("S42");
 
         //when
-        List<BrandDto> brands = brandService.getAllBrands();
+        List<ModelDto> brands = modelService.getAllModels();
 
         //then
         assertEquals(2, brands.size());
-        Assertions.assertTrue(brands.stream().map(BrandDto::getName).collect(Collectors.toList()).containsAll(List.of("BMW", "Audi")));
-        brandRepository.deleteAll();
+        Assertions.assertTrue(brands.stream().map(ModelDto::getName).collect(Collectors.toList()).containsAll(List.of("S1", "S42")));
+        modelRepository.deleteAll();
     }
 
     @Test
     public void givenBrandNotExist_should_createBrand() {
         //Given
-        assertEquals(brandRepository.findByName("BMW"), Optional.empty());
-        brandService.getOrCreateBrand("BMW");
-        brandService.getOrCreateBrand("BMW");
+        assertEquals(modelRepository.findByName("X92"), Optional.empty());
+        modelService.getOrCreateModel("X92");
+        modelService.getOrCreateModel("X92");
 
         //when
-        List<BrandDto> brands = brandService.getAllBrands();
+        List<ModelDto> models = modelService.getAllModels();
 
         //then
-        assertEquals(1, brands.size());
-        Assertions.assertTrue(brands.stream().map(BrandDto::getName).collect(Collectors.toList()).contains("BMW"));
-        brandRepository.deleteAll();
+        assertEquals(1, models.size());
+        Assertions.assertTrue(models.stream().map(ModelDto::getName).collect(Collectors.toList()).contains("X92"));
+        modelRepository.deleteAll();
     }
 }

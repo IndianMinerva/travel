@@ -6,8 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class TravelApplicationTests {
 
-	/*@Test
+	@Test
 	void contextLoads() {
-	}*/
-
+	}
 }

@@ -22,9 +22,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class BrandServiceTest {
 
-    @Container
+    /*@Container
     public static MySQLContainer mySQLContainer = new MySQLContainer<>(DockerImageName.parse("mysql:8.0-debian"))
-            .withReuse(true);
+            .withReuse(true);*/
     @Autowired
     private BrandService brandService;
 

@@ -7,8 +7,10 @@ import com.example.travel.exception.CustomerNotFoundException;
 import com.example.travel.mappers.ContractMapper;
 import com.example.travel.model.Contract;
 import com.example.travel.model.Customer;
+import com.example.travel.model.Vehicle;
 import com.example.travel.repository.ContractRepository;
 import com.example.travel.repository.CustomerRepository;
+import com.example.travel.repository.VehicleRepository;
 import com.example.travel.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,9 @@ public class ContractServiceImpl implements ContractService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private VehicleRepository vehicleRepository;
+
     @Override
     public List<ContractDto> getAllContracts() {
         return contractRepository.findAll().stream().map(ContractMapper::toDto).collect(Collectors.toList());
@@ -40,25 +45,49 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public ContractDto updateContract(Long id, ContractCreationRequest contractCreationRequest) {
+        List<Vehicle> vehicles = getVehicles(contractCreationRequest);
+        List<Vehicle> unavailable = getUnavailableVehicles(vehicles);
+
         Customer customer = customerRepository
                 .findById(contractCreationRequest.getCustomerId())
                 .orElseThrow(() -> new CustomerNotFoundException("Customer Not found. id: " + contractCreationRequest.getCustomerId()));
 
-        return ContractMapper.toDto(Contract.builder().rate(contractCreationRequest.getRate()).customer(customer).build());
+        ContractDto contractDto=  ContractMapper.toDto(Contract.builder().rate(contractCreationRequest.getRate()).customer(customer).build());
+        contractDto.setUnavailableVehicles(unavailable);
+
+        return contractDto;
     }
 
     @Override
     public ContractDto createContract(ContractCreationRequest contractCreationRequest) {
         var customerOptional = customerRepository.findById(contractCreationRequest.getCustomerId());
         Customer customer = customerOptional.orElseThrow(() -> new CustomerNotFoundException("Unknown customer"));
-        return ContractMapper.toDto(contractRepository
+        List<Vehicle> vehicles = getVehicles(contractCreationRequest);
+        List<Vehicle> unavailable = getUnavailableVehicles(vehicles);
+        ContractDto contractDto = ContractMapper.toDto(contractRepository
                 .save(Contract
                         .builder()
                         .customer(customer)
+                        .vehicles(vehicles)
                         .rate(contractCreationRequest.getRate()
                         )
                         .build()
                 )
         );
+
+        contractDto.setUnavailableVehicles(unavailable);
+        return contractDto;
+    }
+
+    private List<Vehicle> getVehicles(ContractCreationRequest contractCreationRequest) {
+        return vehicleRepository.findAllById(contractCreationRequest.getVehicleIds()).stream()
+                .filter(vehicle -> vehicle.getContract() == null)
+                .collect(Collectors.toList());
+    }
+
+    private List<Vehicle> getUnavailableVehicles(List<Vehicle> vehicles) {
+        return vehicles
+                .stream()
+                .filter(vehicle -> vehicle.getContract() != null).collect(Collectors.toList());
     }
 }

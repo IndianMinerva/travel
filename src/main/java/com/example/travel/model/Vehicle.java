@@ -17,14 +17,17 @@ public class Vehicle {
     @GeneratedValue
     private Long id;
 
+    @Version
+    private Long version;
+
     @ManyToOne
     private Brand brand;
 
     @ManyToOne
     private Model model;
 
-/*    @ManyToOne(fetch = FetchType.LAZY)
-    private LeasingContract leasingContract;*/
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Contract contract;
 
 
     private int year;
@@ -32,6 +35,4 @@ public class Vehicle {
     private String vin;
 
     private Double price;
-
-    //private Contract contract;
 }

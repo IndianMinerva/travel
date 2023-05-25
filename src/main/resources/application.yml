@@ -5,7 +5,7 @@ spring:
     username: root
     password: password
   jpa:
-    #hibernate.ddl-auto: update
+    hibernate.ddl-auto: update
     #generate-ddl: true
     show-sql: true
   flyway:

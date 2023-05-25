@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,16 +19,18 @@ public class Contract {
     @GeneratedValue
     private Long id;
 
+    @Version
+    private Long version;
+
     @ManyToOne
     private Customer customer;
 
-    /*@OneToMany
-    @JoinTable(
-            name="CONTRACT_VEHICLE",
-            joinColumns = @JoinColumn( name="contract_id"),
-            inverseJoinColumns = @JoinColumn( name="vehicle_id")
+    @OneToMany(
+            mappedBy = "contract",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
-    private List<Vehicle> vehicles;*/
+    private List<Vehicle> vehicles;
 
     private Double rate;
 

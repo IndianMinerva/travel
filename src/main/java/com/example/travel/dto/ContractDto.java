@@ -1,10 +1,8 @@
 package com.example.travel.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.example.travel.model.Vehicle;
+import lombok.*;
 
 import java.util.List;
 
@@ -17,4 +15,7 @@ public class ContractDto {
     private CustomerDto customer;
     private List<VehicleDto> vehicles;
     private Double monthlyRate;
+
+    @Setter
+    private List<Vehicle> unavailableVehicles;
 }

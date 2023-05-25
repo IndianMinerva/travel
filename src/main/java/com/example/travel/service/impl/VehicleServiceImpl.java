@@ -29,6 +29,11 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public VehicleDto creteVehicle(VehicleCreationRequest vehicleCreationRequest) {
+        return updateVehicle(null, vehicleCreationRequest);
+    }
+
+    @Override
+    public VehicleDto updateVehicle(Long id, VehicleCreationRequest vehicleCreationRequest) {
         var brand = brandService.getOrCreateBrand(vehicleCreationRequest.getBrandName());
         var model = modelService.getOrCreateModel(vehicleCreationRequest.getModelName());
 
@@ -44,19 +49,19 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     private VehicleDto saveVehicle(Vehicle vehicle) {
-        return VehicleMapper.toVehicleDto(vehicleRepository.save(vehicle));
+        return VehicleMapper.toDto(vehicleRepository.save(vehicle));
     }
 
     @Override
     public VehicleDto getVehicle(Long id) {
         return vehicleRepository
                 .findById(id)
-                .map(VehicleMapper::toVehicleDto)
+                .map(VehicleMapper::toDto)
                 .orElseThrow(() -> new VehicleNotFoundException("Vehicle with the id could not be found"));
     }
 
     @Override
     public List<VehicleDto> getAllVehicles() {
-        return vehicleRepository.findAll().stream().map(VehicleMapper::toVehicleDto).collect(Collectors.toList());
+        return vehicleRepository.findAll().stream().map(VehicleMapper::toDto).collect(Collectors.toList());
     }
 }

@@ -11,14 +11,12 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Log4j2
 @Service
 public class CustomerServiceImpl implements CustomerService {
-    private static SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy.MM.dd");
     @Autowired
     private CustomerRepository customerRepository;
 
@@ -27,11 +25,11 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository
                 .findById(id)
                 .map(CustomerMapper::toDto)
-                .orElseThrow(() -> new CustomerNotFoundException("Given customer wuth the Id: " + id + " could not be found"));
+                .orElseThrow(() -> new CustomerNotFoundException("Given customer with the Id: " + id + " could not be found"));
     }
 
     @Override
-    public CustomerDto createOrUpdateCustomer(CustomerCreationRequest customerCreationRequest) {
+    public CustomerDto createCustomer(CustomerCreationRequest customerCreationRequest) {
         Customer.CustomerBuilder builder = Customer
                 .builder()
                 .firstName(customerCreationRequest.getFirstName())
@@ -42,15 +40,15 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto createOrUpdateCustomer(Long id, CustomerDto customerDto) {  //TODO: Finish this tomorrow
+    public CustomerDto updateCustomer(Long id, CustomerCreationRequest customerCreationRequest) {
         return customerRepository.findById(id).map(customer -> {
             Customer savedCustomer = new Customer(
-                    customerDto.getId(),
-                    customerDto.getFirstName(),
-                    customerDto.getLastName(),
-                    customerDto.getDob());  //TODO: validate this at the request
+                    customer.getId(),
+                    customerCreationRequest.getFirstName(),
+                    customerCreationRequest.getLastName(),
+                    customerCreationRequest.getDob());
             return CustomerMapper.toDto(customerRepository.save(savedCustomer));
-        }).orElseThrow(() -> new CustomerNotFoundException("Given customer wuth the Id: " + id + " could not be found"));
+        }).orElseThrow(() -> new CustomerNotFoundException("Given customer with the Id: " + id + " could not be found"));
     }
 
     @Override

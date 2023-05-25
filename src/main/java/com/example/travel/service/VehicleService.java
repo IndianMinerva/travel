@@ -8,6 +8,7 @@ import java.util.List;
 public interface VehicleService {
     VehicleDto creteVehicle(VehicleCreationRequest vehicleCreationRequest);
 
+    VehicleDto updateVehicle(Long Id, VehicleCreationRequest vehicleCreationRequest);
 
     VehicleDto getVehicle(Long id);
 

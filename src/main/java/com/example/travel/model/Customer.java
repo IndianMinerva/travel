@@ -6,17 +6,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.internal.util.Contracts;
 
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Entity
 @Builder
+@Table(name = "CUSTOMER")
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
     @Column(name = "first_name")
@@ -27,4 +30,7 @@ public class Customer {
 
     @Column(name = "dob")
     private Date dateOfBirth;
+
+    /*@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<LeasingContract> contracts;*/
 }

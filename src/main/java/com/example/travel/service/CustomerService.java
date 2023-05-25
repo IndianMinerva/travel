@@ -8,9 +8,9 @@ import java.util.List;
 public interface CustomerService {
     CustomerDto getCustomer(Long id);
 
-    CustomerDto createOrUpdateCustomer(CustomerCreationRequest customerCreationRequest);
+    CustomerDto createCustomer(CustomerCreationRequest customerCreationRequest);
 
-    CustomerDto createOrUpdateCustomer(Long id, CustomerDto customerDto);
+    CustomerDto updateCustomer(Long id, CustomerCreationRequest customerCreationRequest);
 
     List<CustomerDto> getAllCustomers();
 }

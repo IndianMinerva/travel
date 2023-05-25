@@ -18,12 +18,12 @@ public class CustomerController {
 
     @PostMapping
     public CustomerDto createCustomer(@RequestBody @Validated CustomerCreationRequest customerCreationRequest) {
-        return customerService.createOrUpdateCustomer(customerCreationRequest);
+        return customerService.createCustomer(customerCreationRequest);
     }
 
     @PutMapping("/{id}")
-    public CustomerDto updateCustomer(@PathVariable Long id, CustomerDto customerDto) { //TODO: use DTO
-            return customerService.createOrUpdateCustomer(id, customerDto);
+    public CustomerDto updateCustomer(@PathVariable Long id, CustomerCreationRequest customerCreationRequest) {
+            return customerService.updateCustomer(id, customerCreationRequest);
     }
 
     @GetMapping("/{id}")

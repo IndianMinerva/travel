@@ -1,9 +1,6 @@
 package com.example.travel.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,9 +23,15 @@ public class Vehicle {
     @ManyToOne
     private Model model;
 
+/*    @ManyToOne(fetch = FetchType.LAZY)
+    private LeasingContract leasingContract;*/
+
+
     private int year;
 
     private String vin;
 
     private Double price;
+
+    //private Contract contract;
 }

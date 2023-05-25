@@ -20,6 +20,11 @@ public class VehicleController {
         return vehicleService.creteVehicle(vehicleCreationRequest);
     }
 
+    @PutMapping("/{id}")
+    public VehicleDto updateVehicle(@PathVariable Long id, @RequestBody VehicleCreationRequest vehicleCreationRequest) {
+        return vehicleService.creteVehicle(vehicleCreationRequest);
+    }
+
     @GetMapping("/{id}")
     public VehicleDto getVehicle(@PathVariable Long id) {
         return vehicleService.getVehicle(id);

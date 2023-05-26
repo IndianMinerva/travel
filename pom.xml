@@ -149,7 +149,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>7.0.0</version>
                 <configuration>
-                    <url>jdbc:mysql://localhost:3306/arun</url>
+                    <url>jdbc:mysql://localhost:3306/travel</url>
                     <user>root</user>
                     <password>password</password>
                 </configuration>

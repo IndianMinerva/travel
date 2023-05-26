@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/arun
+    url: jdbc:mysql://mysqldb:3306/travel
     username: root
     password: password
   jpa:
@@ -11,8 +11,8 @@ spring:
   flyway:
     user: root
     password: password
-    schemas: arun
-    url: jdbc:mysql://localhost:3306/arun
+    schemas: travel
+    url: jdbc:mysql://mysqldb:3306/travel
     locations: classpath:db/migration
     baseline-on-migrate: true
     create-schemas: true

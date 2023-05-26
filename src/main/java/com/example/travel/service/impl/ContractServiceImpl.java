@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,7 +62,7 @@ public class ContractServiceImpl implements ContractService {
     @Override
     @Transactional
     public ContractDto createContract(ContractCreationRequest contractCreationRequest) {
-        var customerOptional = customerRepository.findById(contractCreationRequest.getCustomerId());
+        Optional<Customer> customerOptional = customerRepository.findById(contractCreationRequest.getCustomerId());
         Customer customer = customerOptional.orElseThrow(() -> new CustomerNotFoundException("Unknown customer"));
         List<Vehicle> vehicles = getVehicles(contractCreationRequest);
         List<Vehicle> unavailable = getUnavailableVehicles(vehicles);

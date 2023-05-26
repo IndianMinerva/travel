@@ -6,8 +6,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=travel
-      #- MYSQL_USER=flyway
-      #- MYSQL_PASSWORD=flyway
+      - MYSQL_USER=flyway
+      - MYSQL_PASSWORD=flyway
     ports:
       - 3306:3306
   my-app:

@@ -31,13 +31,6 @@ public class Contract {
 
     private Double rate;
 
-    public void addVehicles(List<Vehicle> vehicles) {
-        if (this.vehicles == null) {
-            this.vehicles = new ArrayList<>();
-        }
-        this.vehicles.addAll(vehicles);
-    }
-
     public Contract(Customer customer, Double rate) {
         this.customer = customer;
         this.rate = rate;

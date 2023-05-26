@@ -55,7 +55,7 @@ public class ContractServiceTest {
     }
 
     @Test
-    public void givenVehicles_should_returnVehicles() {
+    public void givenContract_should_returnContract() {
         //Given
         VehicleDto vehicle1 = vehicleService.creteVehicle(new VehicleCreationRequest("BMW", "S1", 2000, "X12345", 123.45d));
         VehicleDto vehicle2 = vehicleService.creteVehicle(new VehicleCreationRequest("AUDI", "X12", 2000, null, 123.45d));
@@ -77,29 +77,29 @@ public class ContractServiceTest {
     }
 
     @Test
-    public void givenVehicles_should_returnParticularVehicle() {
+    public void givenContract_should_allowUpdation() {
         //Given
         VehicleDto vehicle1 = vehicleService.creteVehicle(new VehicleCreationRequest("BMW", "S1", 2000, "X12345", 123.45d));
-        vehicleService.creteVehicle(new VehicleCreationRequest("AUDI", "X12", 2000, null, 123.45d));
-
-        //When
-        VehicleDto vehicleDto = vehicleService.getVehicle(vehicle1.getId());
-
-        //Then
-        Assertions.assertEquals(vehicle1, vehicleDto);
-    }
-
-    @Test
-    public void givenVehicle_should_allowUpdatingVehicle() {
-        //Given
-        VehicleDto vehicle1 = vehicleService.creteVehicle(new VehicleCreationRequest("BMW", "S1", 2000, null, 123000.45d));
-
+        CustomerDto customerDto = customerService.createCustomer(new CustomerCreationRequest("Mark", "Twain", new Date()));
         //when
-        VehicleDto updatedVehicleDto = vehicleService.updateVehicle(vehicle1.getId(), new VehicleCreationRequest("BMW", "S1", 2000, "X880997", 224000.89d));
-        VehicleDto retrievedVehicleDto = vehicleService.getVehicle(vehicle1.getId());
+        List<VehicleDto> vehicles = vehicleService.getAllVehicles();
+        ContractDto contractDto = contractService.createContract(new ContractCreationRequest(customerDto.getId(), 23.50d, List.of(vehicle1.getId())));
+        assertEquals(1, contractDto.getVehicles().size());
+
+        VehicleDto vehicle2 = vehicleService.creteVehicle(new VehicleCreationRequest("AUDI", "X12", 2000, null, 123.45d));
+
+        contractDto = contractService.updateContract(contractDto.getContractNo(), new ContractCreationRequest(customerDto.getId(), 23.50d, List.of(vehicle1.getId(), vehicle2.getId())));
 
         //then
-        Assertions.assertEquals(updatedVehicleDto, retrievedVehicleDto);
+        assertEquals(2, contractDto.getVehicles().size());
+        vehicles.stream().filter(v -> !Objects.isNull(v.getVin())).findFirst().map(v -> {
+            Assertions.assertEquals(vehicle1, v);
+            return true;
+        });
 
+        vehicles.stream().filter(v -> Objects.isNull(v.getVin())).findFirst().map(v -> {
+            Assertions.assertEquals(vehicle2, v);
+            return true;
+        });
     }
 }

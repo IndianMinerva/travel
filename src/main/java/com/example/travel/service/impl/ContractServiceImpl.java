@@ -45,6 +45,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    @Transactional
     public ContractDto updateContract(Long id, ContractCreationRequest contractCreationRequest) {
         List<Vehicle> vehicles = getVehicles(contractCreationRequest);
         List<Vehicle> unavailable = getUnavailableVehicles(vehicles);
@@ -53,7 +54,8 @@ public class ContractServiceImpl implements ContractService {
                 .findById(contractCreationRequest.getCustomerId())
                 .orElseThrow(() -> new CustomerNotFoundException("Customer Not found. id: " + contractCreationRequest.getCustomerId()));
 
-        ContractDto contractDto = ContractMapper.toDto(Contract.builder().rate(contractCreationRequest.getRate()).customer(customer).build());
+        ContractDto contractDto = ContractMapper
+                .toDto(contractRepository.save(Contract.builder().rate(contractCreationRequest.getRate()).customer(customer).vehicles(vehicles).build()));
         contractDto.setUnavailableVehicles(unavailable);
 
         return contractDto;

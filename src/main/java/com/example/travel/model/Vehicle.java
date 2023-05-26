@@ -26,8 +26,8 @@ public class Vehicle {
     @ManyToOne
     private Model model;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="contract_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "contract_id", referencedColumnName = "id")
     private Contract contract;
 
 

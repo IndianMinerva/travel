@@ -12,6 +12,7 @@ import com.example.travel.repository.ContractRepository;
 import com.example.travel.repository.CustomerRepository;
 import com.example.travel.repository.VehicleRepository;
 import com.example.travel.service.ContractService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class ContractServiceImpl implements ContractService {
-
     @Autowired
     private ContractRepository contractRepository;
 
@@ -52,31 +52,24 @@ public class ContractServiceImpl implements ContractService {
                 .findById(contractCreationRequest.getCustomerId())
                 .orElseThrow(() -> new CustomerNotFoundException("Customer Not found. id: " + contractCreationRequest.getCustomerId()));
 
-        ContractDto contractDto=  ContractMapper.toDto(Contract.builder().rate(contractCreationRequest.getRate()).customer(customer).build());
+        ContractDto contractDto = ContractMapper.toDto(Contract.builder().rate(contractCreationRequest.getRate()).customer(customer).build());
         contractDto.setUnavailableVehicles(unavailable);
 
         return contractDto;
     }
 
     @Override
+    @Transactional
     public ContractDto createContract(ContractCreationRequest contractCreationRequest) {
         var customerOptional = customerRepository.findById(contractCreationRequest.getCustomerId());
         Customer customer = customerOptional.orElseThrow(() -> new CustomerNotFoundException("Unknown customer"));
         List<Vehicle> vehicles = getVehicles(contractCreationRequest);
         List<Vehicle> unavailable = getUnavailableVehicles(vehicles);
-        ContractDto contractDto = ContractMapper.toDto(contractRepository
-                .save(Contract
-                        .builder()
-                        .customer(customer)
-                        .vehicles(vehicles)
-                        .rate(contractCreationRequest.getRate()
-                        )
-                        .build()
-                )
-        );
-
+        Contract contract = Contract.builder().customer(customer).vehicles(vehicles).rate(contractCreationRequest.getRate()).build();
+        ContractDto contractDto = ContractMapper.toDto(contractRepository.save(contract));
         contractDto.setUnavailableVehicles(unavailable);
-        return contractDto;
+
+        return ContractMapper.toDto(contract);
     }
 
     private List<Vehicle> getVehicles(ContractCreationRequest contractCreationRequest) {

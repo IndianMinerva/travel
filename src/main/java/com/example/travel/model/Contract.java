@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,14 +26,17 @@ public class Contract {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(
-           // mappedBy = "contract",
-           // cascade = CascadeType.ALL
-    )
-    @JoinColumn(name = "cart_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "contract")
     private List<Vehicle> vehicles;
 
     private Double rate;
+
+    public void addVehicles(List<Vehicle> vehicles) {
+        if (this.vehicles == null) {
+            this.vehicles = new ArrayList<>();
+        }
+        this.vehicles.addAll(vehicles);
+    }
 
     public Contract(Customer customer, Double rate) {
         this.customer = customer;

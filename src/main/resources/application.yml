@@ -20,3 +20,8 @@ spring:
   logging:
     level:
       root: debug
+logging:
+  level:
+    org:
+      hibernate:
+        SQL=DEBUG:

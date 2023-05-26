@@ -1,7 +1,6 @@
 package com.example.travel.service;
 
-import com.example.travel.dto.VehicleCreationRequest;
-import com.example.travel.dto.VehicleDto;
+import com.example.travel.dto.*;
 import com.example.travel.repository.BrandRepository;
 import com.example.travel.repository.ModelRepository;
 import com.example.travel.repository.VehicleRepository;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
 @SpringBootTest
-public class VehicleServiceTest {
+public class ContractServiceTest {
 
     /*@Container
     public static MySQLContainer mySQLContainer = new MySQLContainer<>(DockerImageName.parse("mysql:8.0-debian"))
@@ -28,6 +28,12 @@ public class VehicleServiceTest {
             .withPassword("password")
             .withDatabaseName("travel")
             .withReuse(true);*/
+    @Autowired
+    private ContractService contractService;
+
+    @Autowired
+    private CustomerService customerService;
+
     @Autowired
     private VehicleService vehicleService;
 
@@ -53,12 +59,12 @@ public class VehicleServiceTest {
         //Given
         VehicleDto vehicle1 = vehicleService.creteVehicle(new VehicleCreationRequest("BMW", "S1", 2000, "X12345", 123.45d));
         VehicleDto vehicle2 = vehicleService.creteVehicle(new VehicleCreationRequest("AUDI", "X12", 2000, null, 123.45d));
-
+        CustomerDto customerDto = customerService.createCustomer(new CustomerCreationRequest("Mark", "Twain", new Date()));
         //when
         List<VehicleDto> vehicles = vehicleService.getAllVehicles();
-
+        ContractDto contractDto = contractService.createContract(new ContractCreationRequest(customerDto.getId(), 23.50d, List.of(vehicle1.getId(), vehicle2.getId())));
         //then
-        assertEquals(2, vehicles.size());
+        assertEquals(vehicles.size(), contractDto.getVehicles().size());
         vehicles.stream().filter(v -> !Objects.isNull(v.getVin())).findFirst().map(v -> {
             Assertions.assertEquals(vehicle1, v);
             return true;

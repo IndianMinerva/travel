@@ -30,7 +30,4 @@ public class Customer {
 
     @Column(name = "dob")
     private Date dateOfBirth;
-
-    /*@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
-    private List<LeasingContract> contracts;*/
 }

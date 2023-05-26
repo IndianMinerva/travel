@@ -1,5 +1,6 @@
 package com.example.travel.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,7 @@ public class Vehicle {
     private Model model;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="contract_id")
     private Contract contract;
 
 

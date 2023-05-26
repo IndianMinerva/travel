@@ -3,8 +3,6 @@ package com.example.travel.mappers;
 import com.example.travel.dto.VehicleDto;
 import com.example.travel.model.Vehicle;
 
-import java.util.Optional;
-
 import static com.example.travel.mappers.ModelMapper.toModelDto;
 
 public class VehicleMapper {
@@ -14,7 +12,7 @@ public class VehicleMapper {
                 BrandMapper.toDto(vehicle.getBrand()),
                 toModelDto(vehicle.getModel()),
                 vehicle.getYear(),
-                Optional.ofNullable(vehicle.getVin()).orElse("-"),
+                vehicle.getVin(),
                 vehicle.getPrice()
         );
     }

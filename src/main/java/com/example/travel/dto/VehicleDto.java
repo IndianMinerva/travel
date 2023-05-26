@@ -14,5 +14,5 @@ public class VehicleDto {
     private ModelDto modelDto;
     private int year;
     private String vin;
-    private Double price;  //TODO: Adjust it to two decimal points
+    private Double price;
 }

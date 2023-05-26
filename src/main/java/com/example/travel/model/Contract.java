@@ -26,10 +26,10 @@ public class Contract {
     private Customer customer;
 
     @OneToMany(
-            mappedBy = "contract",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+           // mappedBy = "contract",
+           // cascade = CascadeType.ALL
     )
+    @JoinColumn(name = "cart_id")
     private List<Vehicle> vehicles;
 
     private Double rate;

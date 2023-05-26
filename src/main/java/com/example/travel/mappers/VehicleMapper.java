@@ -11,7 +11,7 @@ public class VehicleMapper {
                 vehicle.getId(),
                 BrandMapper.toDto(vehicle.getBrand()),
                 toModelDto(vehicle.getModel()),
-                vehicle.getYear(),
+                vehicle.getModel_year(),
                 vehicle.getVin(),
                 vehicle.getPrice()
         );

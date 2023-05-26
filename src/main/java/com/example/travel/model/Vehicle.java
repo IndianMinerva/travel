@@ -1,6 +1,5 @@
 package com.example.travel.model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,7 +31,7 @@ public class Vehicle {
     private Contract contract;
 
 
-    private int year;
+    private int model_year;
 
     private String vin;
 

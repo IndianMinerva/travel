@@ -36,12 +36,20 @@ public class VehicleServiceImpl implements VehicleService {
     public VehicleDto updateVehicle(Long id, VehicleCreationRequest vehicleCreationRequest) {
         var brand = brandService.getOrCreateBrand(vehicleCreationRequest.getBrandName());
         var model = modelService.getOrCreateModel(vehicleCreationRequest.getModelName());
+        Vehicle vehicle;
+        if (id != null) {
+            vehicle = vehicleRepository.findById(id).orElseGet(Vehicle::new);
+        } else {
+            vehicle = new Vehicle();
+        }
 
         Vehicle.VehicleBuilder vehicleBuilder = Vehicle
                 .builder()
+                .id(vehicle.getId())
+                .version(vehicle.getVersion())
                 .brand(brand)
                 .model(model)
-                .year(vehicleCreationRequest.getYear())
+                .model_year(vehicleCreationRequest.getYear())
                 .vin(vehicleCreationRequest.getVin())
                 .price(vehicleCreationRequest.getPrice());
 

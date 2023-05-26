@@ -41,9 +41,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto updateCustomer(Long id, CustomerCreationRequest customerCreationRequest) {
+        Customer oldCustomer;
+        if (id != null) {
+            oldCustomer = customerRepository.findById(id).orElseGet(Customer::new);
+        } else {
+            oldCustomer = new Customer();
+        }
         return customerRepository.findById(id).map(customer -> {
             Customer savedCustomer = new Customer(
-                    customer.getId(),
+                    oldCustomer.getId(),
+                    oldCustomer.getVersion(),
                     customerCreationRequest.getFirstName(),
                     customerCreationRequest.getLastName(),
                     customerCreationRequest.getDob());

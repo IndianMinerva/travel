@@ -6,10 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.internal.util.Contracts;
 
 import java.util.Date;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +19,9 @@ public class Customer {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Version
+    private Long version;
 
     @Column(name = "first_name")
     private String firstName;

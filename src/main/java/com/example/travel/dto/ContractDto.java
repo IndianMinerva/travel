@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Builder
+@Data
 public class ContractDto {
     private Long contractNo;
     private CustomerDto customer;

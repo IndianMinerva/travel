@@ -3,7 +3,7 @@ CREATE TABLE vehicle(
 	version INT,
 	brand_id INT,
 	model_id INT,
-	year INT(4),
+	model_year INT(4),
 	vin VARCHAR(10) NULL UNIQUE,
 	price DOUBLE,
 	contract_id INT NULL,

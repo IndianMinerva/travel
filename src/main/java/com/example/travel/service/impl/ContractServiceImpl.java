@@ -12,7 +12,6 @@ import com.example.travel.repository.ContractRepository;
 import com.example.travel.repository.CustomerRepository;
 import com.example.travel.repository.VehicleRepository;
 import com.example.travel.service.ContractService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +59,6 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    @Transactional
     public ContractDto createContract(ContractCreationRequest contractCreationRequest) {
         Optional<Customer> customerOptional = customerRepository.findById(contractCreationRequest.getCustomerId());
         Customer customer = customerOptional.orElseThrow(() -> new CustomerNotFoundException("Unknown customer"));

@@ -1,9 +1,13 @@
 package com.example.travel.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "BRAND")
 public class Brand {
 
-    @Id
+    @javax.persistence.Id
     @GeneratedValue
     private Long Id;
 

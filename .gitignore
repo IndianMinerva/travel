@@ -36,3 +36,7 @@ build/
 
 ### Mac ###
 .DS_Store%
+
+### DB files
+testdb.trace.db
+testdb.mv.db

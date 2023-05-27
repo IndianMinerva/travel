@@ -1,0 +1,1 @@
+gradle build jibDockerBuild && docker kill $(docker ps -q); docker-compose -f docker-compose.yml up

@@ -1,9 +1,11 @@
 package com.example.travel.controller;
 
 import com.example.travel.TravelApplication;
-import com.example.travel.dto.CustomerCreationRequest;
-import com.example.travel.dto.CustomerDto;
-import com.example.travel.service.CustomerService;
+import com.example.travel.dto.BrandDto;
+import com.example.travel.dto.ModelDto;
+import com.example.travel.dto.VehicleCreationRequest;
+import com.example.travel.dto.VehicleDto;
+import com.example.travel.service.VehicleService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +20,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static com.example.travel.utils.ObjectMapperUtils.getMapper;
@@ -36,70 +37,70 @@ public class VehicleControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private CustomerService customerService;
+    private VehicleService vehicleService;
 
 
     @Test
-    public void given_customer_shouldCreateAndReturn_OK() throws Exception {
+    public void given_vehicle_shouldCreateAndReturn_OK() throws Exception {
         //Given
-        CustomerCreationRequest customerCreationRequest = new CustomerCreationRequest("Wolfgang", "Pauli", new Date());
-        CustomerDto expectedCustomerDto = new CustomerDto(1L, "Wolfgang", "Pauli", new Date());
-        Mockito.when(customerService.createCustomer(any())).thenReturn(expectedCustomerDto);
+        VehicleCreationRequest vehicleCreationRequest = new VehicleCreationRequest("BMW", "S42", 2000, "X98923", 10000.00d);
+        VehicleDto expectedVehicleDto = new VehicleDto(1L, new BrandDto(1L, "BMW"), new ModelDto(1L, "S42"), 2000, "X98923", 10000.00d);
+        Mockito.when(vehicleService.creteVehicle(any())).thenReturn(expectedVehicleDto);
 
         //When
         String jsonString = this.mockMvc
-                .perform(post("/customers")
+                .perform(post("/vehicles")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(getMapper().writeValueAsString(customerCreationRequest)))
+                        .content(getMapper().writeValueAsString(vehicleCreationRequest)))
                 .andExpect(status().isOk())
                 .andReturn().getResponse()
                 .getContentAsString();
 
-        CustomerDto customerDto = getMapper().readValue(jsonString, CustomerDto.class);
+        VehicleDto vehicleDto = getMapper().readValue(jsonString, VehicleDto.class);
 
         //then
-        Assert.assertEquals(expectedCustomerDto, customerDto);
+        Assert.assertEquals(expectedVehicleDto, vehicleDto);
     }
 
     @Test
-    public void given_customers_when_getAllCustomers_shouldReturnCustomers() throws Exception {
-        customerService.createCustomer(new CustomerCreationRequest("Wolfgang", "Pauli", new Date()));
-        customerService.createCustomer(new CustomerCreationRequest("Albert", "Einstein", new Date()));
-        List<CustomerDto> expectedCustomerDtos = List.of(new CustomerDto(1L, "Wolfgang", "Pauli", new Date()),
-                new CustomerDto(2L, "Wolfgang", "Pauli", new Date()));
-        Mockito.when(customerService.getAllCustomers()).thenReturn(expectedCustomerDtos);
+    public void given_vehicles_when_getAllVehicles_shouldReturnVehicles() throws Exception {
+        vehicleService.creteVehicle(new VehicleCreationRequest("BMW", "S42", 2000, "X989231", 10000.00d));
+        vehicleService.creteVehicle(new VehicleCreationRequest("AUDI", "X42", 2000, "X98923", 10000.00d));
+        List<VehicleDto> expectedVehicleDtos = List.of(new VehicleDto(1L, new BrandDto(1L, "BMW"), new ModelDto(1L, "S42"), 2000, "X989231", 10000.00d),
+                new VehicleDto(1L, new BrandDto(1L, "AUDI"), new ModelDto(1L, "X42"), 2000, "X98923", 10000.00d));
+        Mockito.when(vehicleService.getAllVehicles()).thenReturn(expectedVehicleDtos);
 
         //When
         String jsonString = this.mockMvc
-                .perform(get("/customers"))
+                .perform(get("/vehicles"))
                 .andExpect(status().isOk())
                 .andReturn().getResponse()
                 .getContentAsString();
 
-        List<CustomerDto> customerDtos = Arrays.asList(getMapper().readValue(jsonString, CustomerDto[].class));
+        List<VehicleDto> vehicleDtos = Arrays.asList(getMapper().readValue(jsonString, VehicleDto[].class));
 
         //then
-        Assert.assertEquals(expectedCustomerDtos, customerDtos);
+        Assert.assertEquals(expectedVehicleDtos, vehicleDtos);
     }
 
     @Test
-    public void given_customer_updateCustomer_should_updateCustomer() throws Exception {
-        CustomerCreationRequest customerCreationRequest = new CustomerCreationRequest("Wolfgang", "Pauli", new Date());
-        CustomerDto expectedCustomerDto = new CustomerDto(1L, "Richard", "Feynman", new Date());
-        Mockito.when(customerService.updateCustomer(any(), any())).thenReturn(expectedCustomerDto);
+    public void given_vehicles_updateVehicle_should_updateVehicles() throws Exception {
+        VehicleCreationRequest vehicleCreationRequest = new VehicleCreationRequest("BMW", "S42", 2000, "X989231", 10000.00d);
+        VehicleDto expectedVehicleDto = new VehicleDto(1L, new BrandDto(1L, "BMW"), new ModelDto(1L, "S42"), 2000, "X989231", 10000.00d);
+        Mockito.when(vehicleService.updateVehicle(any(), any())).thenReturn(expectedVehicleDto);
 
         String jsonString = this.mockMvc
-                .perform(put("/customers/1")
+                .perform(put("/vehicles/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(getMapper().writeValueAsString(customerCreationRequest))
+                        .content(getMapper().writeValueAsString(vehicleCreationRequest))
                 )
                 .andExpect(status().isOk())
                 .andReturn().getResponse()
                 .getContentAsString();
 
-        CustomerDto customerDto = getMapper().readValue(jsonString, CustomerDto.class);
+        VehicleDto vehicleDto = getMapper().readValue(jsonString, VehicleDto.class);
 
         //then
-        Assert.assertEquals(expectedCustomerDto, customerDto);
+        Assert.assertEquals(expectedVehicleDto, vehicleDto);
     }
 }

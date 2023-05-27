@@ -22,8 +22,8 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public CustomerDto updateCustomer(@PathVariable Long id, CustomerCreationRequest customerCreationRequest) {
-            return customerService.updateCustomer(id, customerCreationRequest);
+    public CustomerDto updateCustomer(@PathVariable Long id, @RequestBody CustomerCreationRequest customerCreationRequest) {
+        return customerService.updateCustomer(id, customerCreationRequest);
     }
 
     @GetMapping("/{id}")

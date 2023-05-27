@@ -22,7 +22,7 @@ public class VehicleController {
 
     @PutMapping("/{id}")
     public VehicleDto updateVehicle(@PathVariable Long id, @RequestBody VehicleCreationRequest vehicleCreationRequest) {
-        return vehicleService.creteVehicle(vehicleCreationRequest);
+        return vehicleService.updateVehicle(id, vehicleCreationRequest);
     }
 
     @GetMapping("/{id}")

@@ -10,11 +10,17 @@ services:
       - MYSQL_PASSWORD=flyway
     ports:
       - 3306:3306
+    healthcheck:
+      test: "mysqladmin -u root -ppassword ping"
+      interval: 10s
+      retries: 10
+
   my-app:
     image: 'travel:latest'
     ports:
       - '8080:8080'
     environment:
-        SPRING_PROFILES_ACTIVE: test
+      SPRING_PROFILES_ACTIVE: test
     depends_on:
-      - mysqldb
+      mysqldb:
+        condition: service_healthy

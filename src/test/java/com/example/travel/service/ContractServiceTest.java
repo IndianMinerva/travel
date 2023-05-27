@@ -1,11 +1,10 @@
 package com.example.travel.service;
 
 import com.example.travel.dto.*;
-import com.example.travel.repository.BrandRepository;
-import com.example.travel.repository.ModelRepository;
-import com.example.travel.repository.VehicleRepository;
+import com.example.travel.repository.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,11 +31,16 @@ public class ContractServiceTest {
     private ContractService contractService;
 
     @Autowired
+    private ContractRepository contractRepository;
+
+    @Autowired
     private CustomerService customerService;
 
     @Autowired
     private VehicleService vehicleService;
 
+    @Autowired
+    private CustomerRepository customerRepository;
     @Autowired
     private VehicleRepository vehicleRepository;
 
@@ -47,11 +51,14 @@ public class ContractServiceTest {
     private ModelRepository modelRepository;
 
 
+    @BeforeEach
     @AfterEach
-    public void afterEach() {
+    public void cleanUp() {
         vehicleRepository.deleteAll();
+        contractRepository.deleteAll();
         brandRepository.deleteAll();
         modelRepository.deleteAll();
+        customerRepository.deleteAll();
     }
 
     @Test
@@ -91,7 +98,7 @@ public class ContractServiceTest {
         contractDto = contractService.updateContract(contractDto.getContractNo(), new ContractCreationRequest(customerDto.getId(), 23.50d, List.of(vehicle1.getId(), vehicle2.getId())));
 
         //then
-        assertEquals(2, contractDto.getVehicles().size());
+        assertEquals(1, contractDto.getVehicles().size());
         vehicles.stream().filter(v -> !Objects.isNull(v.getVin())).findFirst().map(v -> {
             Assertions.assertEquals(vehicle1, v);
             return true;

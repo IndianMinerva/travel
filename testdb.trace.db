@@ -1,6 +1,0 @@
-2023-05-26 09:23:15 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BRAND" not found (this database is empty); SQL statement:
-select b1_0.id,b1_0.name from brand b1_0 where b1_0.name=? [42104-214]
-2023-05-26 09:24:02 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BRAND" not found (this database is empty); SQL statement:
-select b1_0.id,b1_0.name from brand b1_0 where b1_0.name=? [42104-214]

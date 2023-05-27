@@ -28,7 +28,7 @@ swagger:
     url=http://localhost:8080:
 server:
   error:
-    whitelabel:
-      enabled: true
-      include-stacktrace: true
-      include-message: true
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: never
+    include-exception: false

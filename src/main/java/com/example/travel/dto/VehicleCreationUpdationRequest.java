@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class VehicleCreationRequest {
+public class VehicleCreationUpdationRequest {
     private String brandName;
     private String modelName;
     private int year;

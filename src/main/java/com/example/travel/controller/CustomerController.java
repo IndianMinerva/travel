@@ -1,6 +1,6 @@
 package com.example.travel.controller;
 
-import com.example.travel.dto.CustomerCreationRequest;
+import com.example.travel.dto.CustomerCreationUpdationRequest;
 import com.example.travel.dto.CustomerDto;
 import com.example.travel.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,13 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping
-    public CustomerDto createCustomer(@RequestBody @Validated CustomerCreationRequest customerCreationRequest) {
-        return customerService.createCustomer(customerCreationRequest);
+    public CustomerDto createCustomer(@RequestBody @Validated CustomerCreationUpdationRequest customerCreationUpdationRequest) {
+        return customerService.createCustomer(customerCreationUpdationRequest);
     }
 
     @PutMapping("/{id}")
-    public CustomerDto updateCustomer(@PathVariable Long id, @RequestBody CustomerCreationRequest customerCreationRequest) {
-        return customerService.updateCustomer(id, customerCreationRequest);
+    public CustomerDto updateCustomer(@PathVariable Long id, @RequestBody CustomerCreationUpdationRequest customerCreationUpdationRequest) {
+        return customerService.updateCustomer(id, customerCreationUpdationRequest);
     }
 
     @GetMapping("/{id}")

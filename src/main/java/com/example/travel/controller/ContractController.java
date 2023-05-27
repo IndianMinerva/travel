@@ -1,6 +1,6 @@
 package com.example.travel.controller;
 
-import com.example.travel.dto.ContractCreationRequest;
+import com.example.travel.dto.ContractCreationUpdationRequest;
 import com.example.travel.dto.ContractDto;
 import com.example.travel.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +25,12 @@ public class ContractController {
     }
 
     @PutMapping("/{id}")
-    public ContractDto updateContract(@PathVariable Long id, @RequestBody ContractCreationRequest contractCreationRequest) {
-        return contractService.updateContract(id, contractCreationRequest);
+    public ContractDto updateContract(@PathVariable Long id, @RequestBody ContractCreationUpdationRequest contractCreationUpdationRequest) {
+        return contractService.updateContract(id, contractCreationUpdationRequest);
     }
 
     @PostMapping
-    public ContractDto createContract(@RequestBody ContractCreationRequest contractCreationRequest) {
-        return contractService.createContract(contractCreationRequest);
+    public ContractDto createContract(@RequestBody ContractCreationUpdationRequest contractCreationUpdationRequest) {
+        return contractService.createContract(contractCreationUpdationRequest);
     }
 }

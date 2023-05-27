@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class ContractCreationRequest {
+public class ContractCreationUpdationRequest {
     private Long customerId;
     private Double rate;
     private List<Long> vehicleIds;

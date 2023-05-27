@@ -1,6 +1,6 @@
 package com.example.travel.service;
 
-import com.example.travel.dto.ContractCreationRequest;
+import com.example.travel.dto.ContractCreationUpdationRequest;
 import com.example.travel.dto.ContractDto;
 
 import java.util.List;
@@ -10,6 +10,6 @@ public interface ContractService {
 
     ContractDto getContractById(Long id);
 
-    ContractDto updateContract(Long id, ContractCreationRequest contractCreationRequest);
-    ContractDto createContract(ContractCreationRequest contractCreationRequest);
+    ContractDto updateContract(Long id, ContractCreationUpdationRequest contractCreationUpdationRequest);
+    ContractDto createContract(ContractCreationUpdationRequest contractCreationUpdationRequest);
 }

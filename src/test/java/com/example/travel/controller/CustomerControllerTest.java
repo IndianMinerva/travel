@@ -1,7 +1,7 @@
 package com.example.travel.controller;
 
 import com.example.travel.TravelApplication;
-import com.example.travel.dto.CustomerCreationRequest;
+import com.example.travel.dto.CustomerCreationUpdationRequest;
 import com.example.travel.dto.CustomerDto;
 import com.example.travel.service.CustomerService;
 import org.junit.Assert;
@@ -42,7 +42,7 @@ public class CustomerControllerTest {
     @Test
     public void given_customer_shouldCreateAndReturn_OK() throws Exception {
         //Given
-        CustomerCreationRequest customerCreationRequest = new CustomerCreationRequest("Wolfgang", "Pauli", new Date());
+        CustomerCreationUpdationRequest customerCreationUpdationRequest = new CustomerCreationUpdationRequest("Wolfgang", "Pauli", new Date());
         CustomerDto expectedCustomerDto = new CustomerDto(1L, "Wolfgang", "Pauli", new Date());
         Mockito.when(customerService.createCustomer(any())).thenReturn(expectedCustomerDto);
 
@@ -50,7 +50,7 @@ public class CustomerControllerTest {
         String jsonString = this.mockMvc
                 .perform(post("/customers")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(getMapper().writeValueAsString(customerCreationRequest)))
+                        .content(getMapper().writeValueAsString(customerCreationUpdationRequest)))
                 .andExpect(status().isOk())
                 .andReturn().getResponse()
                 .getContentAsString();
@@ -63,8 +63,8 @@ public class CustomerControllerTest {
 
     @Test
     public void given_customers_when_getAllCustomers_shouldReturnCustomers() throws Exception {
-        customerService.createCustomer(new CustomerCreationRequest("Wolfgang", "Pauli", new Date()));
-        customerService.createCustomer(new CustomerCreationRequest("Albert", "Einstein", new Date()));
+        customerService.createCustomer(new CustomerCreationUpdationRequest("Wolfgang", "Pauli", new Date()));
+        customerService.createCustomer(new CustomerCreationUpdationRequest("Albert", "Einstein", new Date()));
         List<CustomerDto> expectedCustomerDtos = List.of(new CustomerDto(1L, "Wolfgang", "Pauli", new Date()),
                 new CustomerDto(2L, "Wolfgang", "Pauli", new Date()));
         Mockito.when(customerService.getAllCustomers()).thenReturn(expectedCustomerDtos);
@@ -84,14 +84,14 @@ public class CustomerControllerTest {
 
     @Test
     public void given_customer_updateCustomer_should_updateCustomer() throws Exception {
-        CustomerCreationRequest customerCreationRequest = new CustomerCreationRequest("Wolfgang", "Pauli", new Date());
+        CustomerCreationUpdationRequest customerCreationUpdationRequest = new CustomerCreationUpdationRequest("Wolfgang", "Pauli", new Date());
         CustomerDto expectedCustomerDto = new CustomerDto(1L, "Richard", "Feynman", new Date());
         Mockito.when(customerService.updateCustomer(any(), any())).thenReturn(expectedCustomerDto);
 
         String jsonString = this.mockMvc
                 .perform(put("/customers/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(getMapper().writeValueAsString(customerCreationRequest))
+                        .content(getMapper().writeValueAsString(customerCreationUpdationRequest))
                 )
                 .andExpect(status().isOk())
                 .andReturn().getResponse()

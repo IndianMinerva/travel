@@ -1,6 +1,6 @@
 package com.example.travel.controller;
 
-import com.example.travel.dto.VehicleCreationRequest;
+import com.example.travel.dto.VehicleCreationUpdationRequest;
 import com.example.travel.dto.VehicleDto;
 import com.example.travel.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,13 @@ public class VehicleController {
     private VehicleService vehicleService;
 
     @PostMapping
-    public VehicleDto creteVehicle(@RequestBody VehicleCreationRequest vehicleCreationRequest) {
-        return vehicleService.creteVehicle(vehicleCreationRequest);
+    public VehicleDto creteVehicle(@RequestBody VehicleCreationUpdationRequest vehicleCreationUpdationRequest) {
+        return vehicleService.creteVehicle(vehicleCreationUpdationRequest);
     }
 
     @PutMapping("/{id}")
-    public VehicleDto updateVehicle(@PathVariable Long id, @RequestBody VehicleCreationRequest vehicleCreationRequest) {
-        return vehicleService.updateVehicle(id, vehicleCreationRequest);
+    public VehicleDto updateVehicle(@PathVariable Long id, @RequestBody VehicleCreationUpdationRequest vehicleCreationUpdationRequest) {
+        return vehicleService.updateVehicle(id, vehicleCreationUpdationRequest);
     }
 
     @GetMapping("/{id}")

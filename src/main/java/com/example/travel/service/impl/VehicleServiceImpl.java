@@ -1,7 +1,6 @@
 package com.example.travel.service.impl;
 
-import com.example.travel.dto.VehicleCreationRequest;
-import com.example.travel.dto.VehicleDto;
+import com.example.travel.dto.VehicleCreationUpdationRequest;
 import com.example.travel.exception.VehicleNotFoundException;
 import com.example.travel.mappers.VehicleMapper;
 import com.example.travel.model.Brand;
@@ -32,15 +31,15 @@ public class VehicleServiceImpl implements VehicleService {
 
 
     @Override
-    public VehicleDto creteVehicle(VehicleCreationRequest vehicleCreationRequest) {
-        return updateVehicle(null, vehicleCreationRequest);
+    public com.example.travel.dto.VehicleDto creteVehicle(VehicleCreationUpdationRequest vehicleCreationUpdationRequest) {
+        return updateVehicle(null, vehicleCreationUpdationRequest);
     }
 
     @Override
     @Transactional
-    public VehicleDto updateVehicle(Long id, VehicleCreationRequest vehicleCreationRequest) {
-        Brand brand = brandService.getOrCreateBrand(vehicleCreationRequest.getBrandName());
-        Model model = modelService.getOrCreateModel(vehicleCreationRequest.getModelName());
+    public com.example.travel.dto.VehicleDto updateVehicle(Long id, VehicleCreationUpdationRequest vehicleCreationUpdationRequest) {
+        Brand brand = brandService.getOrCreateBrand(vehicleCreationUpdationRequest.getBrandName());
+        Model model = modelService.getOrCreateModel(vehicleCreationUpdationRequest.getModelName());
         Vehicle vehicle;
         if (id != null) {
             vehicle = vehicleRepository.findById(id).orElseGet(Vehicle::new);
@@ -54,19 +53,19 @@ public class VehicleServiceImpl implements VehicleService {
                 .version(vehicle.getVersion())
                 .brand(brand)
                 .model(model)
-                .model_year(vehicleCreationRequest.getYear())
-                .vin(vehicleCreationRequest.getVin())
-                .price(vehicleCreationRequest.getPrice());
+                .model_year(vehicleCreationUpdationRequest.getYear())
+                .vin(vehicleCreationUpdationRequest.getVin())
+                .price(vehicleCreationUpdationRequest.getPrice());
 
         return saveVehicle(vehicleBuilder.build());
     }
 
-    private VehicleDto saveVehicle(Vehicle vehicle) {
+    private com.example.travel.dto.VehicleDto saveVehicle(Vehicle vehicle) {
         return VehicleMapper.toDto(vehicleRepository.save(vehicle));
     }
 
     @Override
-    public VehicleDto getVehicle(Long id) {
+    public com.example.travel.dto.VehicleDto getVehicle(Long id) {
         return vehicleRepository
                 .findById(id)
                 .map(VehicleMapper::toDto)
@@ -74,12 +73,12 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public List<VehicleDto> getAllVehicles() {
+    public List<com.example.travel.dto.VehicleDto> getAllVehicles() {
         return vehicleRepository.findAll().stream().map(VehicleMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<VehicleDto> getAvailableVehicles() {
+    public List<com.example.travel.dto.VehicleDto> getAvailableVehicles() {
         return StreamSupport
                 .stream(vehicleRepository.findByContractNull().spliterator(), false)
                 .map(VehicleMapper::toDto)

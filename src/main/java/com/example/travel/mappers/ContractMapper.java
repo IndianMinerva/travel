@@ -7,11 +7,12 @@ import java.util.stream.Collectors;
 
 public class ContractMapper {
     public static ContractDto toDto(Contract leasingContract) {
+        var x = leasingContract.getVehicles().stream().map(VehicleMapper::toDto).collect(Collectors.toList());
         return ContractDto
                 .builder()
                 .contractNo(leasingContract.getId())
                 .customer(CustomerMapper.toDto(leasingContract.getCustomer()))
-                .vehicles(leasingContract.getVehicles().stream().map(VehicleMapper::toDto).collect(Collectors.toList()))
+                .vehicles(x)
                 .monthlyRate(leasingContract.getRate())
                 .build();
     }

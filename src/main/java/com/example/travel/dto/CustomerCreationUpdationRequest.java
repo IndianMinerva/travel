@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class CustomerCreationRequest {
+public class CustomerCreationUpdationRequest {
     private String firstName;
     private String lastName;
 

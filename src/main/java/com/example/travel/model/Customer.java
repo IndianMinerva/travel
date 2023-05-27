@@ -1,6 +1,7 @@
 package com.example.travel.model;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,5 +31,6 @@ public class Customer {
     private String lastName;
 
     @Column(name = "dob")
+    @Schema(type = "string", pattern = "dd.MM-.yyyy", example = "17.02.2020")
     private Date dateOfBirth;
 }

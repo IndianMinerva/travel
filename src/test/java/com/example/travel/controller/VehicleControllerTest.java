@@ -3,7 +3,7 @@ package com.example.travel.controller;
 import com.example.travel.TravelApplication;
 import com.example.travel.dto.BrandDto;
 import com.example.travel.dto.ModelDto;
-import com.example.travel.dto.VehicleCreationRequest;
+import com.example.travel.dto.VehicleCreationUpdationRequest;
 import com.example.travel.dto.VehicleDto;
 import com.example.travel.service.VehicleService;
 import org.junit.Assert;
@@ -43,7 +43,7 @@ public class VehicleControllerTest {
     @Test
     public void given_vehicle_shouldCreateAndReturn_OK() throws Exception {
         //Given
-        VehicleCreationRequest vehicleCreationRequest = new VehicleCreationRequest("BMW", "S42", 2000, "X98923", 10000.00d);
+        VehicleCreationUpdationRequest vehicleCreationUpdationRequest = new VehicleCreationUpdationRequest("BMW", "S42", 2000, "X98923", 10000.00d);
         VehicleDto expectedVehicleDto = new VehicleDto(1L, new BrandDto(1L, "BMW"), new ModelDto(1L, "S42"), 2000, "X98923", 10000.00d);
         Mockito.when(vehicleService.creteVehicle(any())).thenReturn(expectedVehicleDto);
 
@@ -51,7 +51,7 @@ public class VehicleControllerTest {
         String jsonString = this.mockMvc
                 .perform(post("/vehicles")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(getMapper().writeValueAsString(vehicleCreationRequest)))
+                        .content(getMapper().writeValueAsString(vehicleCreationUpdationRequest)))
                 .andExpect(status().isOk())
                 .andReturn().getResponse()
                 .getContentAsString();
@@ -64,8 +64,8 @@ public class VehicleControllerTest {
 
     @Test
     public void given_vehicles_when_getAllVehicles_shouldReturnVehicles() throws Exception {
-        vehicleService.creteVehicle(new VehicleCreationRequest("BMW", "S42", 2000, "X989231", 10000.00d));
-        vehicleService.creteVehicle(new VehicleCreationRequest("AUDI", "X42", 2000, "X98923", 10000.00d));
+        vehicleService.creteVehicle(new VehicleCreationUpdationRequest("BMW", "S42", 2000, "X989231", 10000.00d));
+        vehicleService.creteVehicle(new VehicleCreationUpdationRequest("AUDI", "X42", 2000, "X98923", 10000.00d));
         List<VehicleDto> expectedVehicleDtos = List.of(new VehicleDto(1L, new BrandDto(1L, "BMW"), new ModelDto(1L, "S42"), 2000, "X989231", 10000.00d),
                 new VehicleDto(1L, new BrandDto(1L, "AUDI"), new ModelDto(1L, "X42"), 2000, "X98923", 10000.00d));
         Mockito.when(vehicleService.getAllVehicles()).thenReturn(expectedVehicleDtos);
@@ -85,14 +85,14 @@ public class VehicleControllerTest {
 
     @Test
     public void given_vehicles_updateVehicle_should_updateVehicles() throws Exception {
-        VehicleCreationRequest vehicleCreationRequest = new VehicleCreationRequest("BMW", "S42", 2000, "X989231", 10000.00d);
+        VehicleCreationUpdationRequest vehicleCreationUpdationRequest = new VehicleCreationUpdationRequest("BMW", "S42", 2000, "X989231", 10000.00d);
         VehicleDto expectedVehicleDto = new VehicleDto(1L, new BrandDto(1L, "BMW"), new ModelDto(1L, "S42"), 2000, "X989231", 10000.00d);
         Mockito.when(vehicleService.updateVehicle(any(), any())).thenReturn(expectedVehicleDto);
 
         String jsonString = this.mockMvc
                 .perform(put("/vehicles/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(getMapper().writeValueAsString(vehicleCreationRequest))
+                        .content(getMapper().writeValueAsString(vehicleCreationUpdationRequest))
                 )
                 .andExpect(status().isOk())
                 .andReturn().getResponse()

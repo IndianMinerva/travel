@@ -1,6 +1,6 @@
 package com.example.travel.service.impl;
 
-import com.example.travel.dto.CustomerCreationRequest;
+import com.example.travel.dto.CustomerCreationUpdationRequest;
 import com.example.travel.dto.CustomerDto;
 import com.example.travel.exception.CustomerNotFoundException;
 import com.example.travel.mappers.CustomerMapper;
@@ -29,18 +29,18 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto createCustomer(CustomerCreationRequest customerCreationRequest) {
+    public CustomerDto createCustomer(CustomerCreationUpdationRequest customerCreationUpdationRequest) {
         Customer.CustomerBuilder builder = Customer
                 .builder()
-                .firstName(customerCreationRequest.getFirstName())
-                .lastName(customerCreationRequest.getLastName())
-                .dateOfBirth(customerCreationRequest.getDob());
+                .firstName(customerCreationUpdationRequest.getFirstName())
+                .lastName(customerCreationUpdationRequest.getLastName())
+                .dateOfBirth(customerCreationUpdationRequest.getDob());
 
         return CustomerMapper.toDto(customerRepository.save(builder.build()));
     }
 
     @Override
-    public CustomerDto updateCustomer(Long id, CustomerCreationRequest customerCreationRequest) {
+    public CustomerDto updateCustomer(Long id, CustomerCreationUpdationRequest customerCreationUpdationRequest) {
         Customer oldCustomer;
         if (id != null) {
             oldCustomer = customerRepository.findById(id).orElseGet(Customer::new);
@@ -51,9 +51,9 @@ public class CustomerServiceImpl implements CustomerService {
             Customer savedCustomer = new Customer(
                     oldCustomer.getId(),
                     oldCustomer.getVersion(),
-                    customerCreationRequest.getFirstName(),
-                    customerCreationRequest.getLastName(),
-                    customerCreationRequest.getDob());
+                    customerCreationUpdationRequest.getFirstName(),
+                    customerCreationUpdationRequest.getLastName(),
+                    customerCreationUpdationRequest.getDob());
             return CustomerMapper.toDto(customerRepository.save(savedCustomer));
         }).orElseThrow(() -> new CustomerNotFoundException("Given customer with the Id: " + id + " could not be found"));
     }

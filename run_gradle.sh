@@ -1,1 +1,1 @@
-gradle build jibDockerBuild && docker kill $(docker ps -q); docker-compose -f docker-compose.yml up
+gradle clean build jibDockerBuild && docker kill $(docker ps -q); docker-compose down; docker-compose -f docker-compose.yml up

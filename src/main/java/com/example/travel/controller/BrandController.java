@@ -4,6 +4,7 @@ import com.example.travel.dto.BrandCreationRequest;
 import com.example.travel.dto.BrandDto;
 import com.example.travel.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class BrandController {
     private BrandService brandService;
 
     @PostMapping
-    public BrandDto createBrand(@RequestBody BrandCreationRequest brandCreationRequest) {
+    public BrandDto createBrand(@RequestBody @Validated BrandCreationRequest brandCreationRequest) {
         return brandService.createBrand(brandCreationRequest);
     }
 

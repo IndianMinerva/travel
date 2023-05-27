@@ -26,11 +26,9 @@ spring:
 swagger:
   host:
     url=http://localhost:8080:
-logging:
-  level:
-    org:
-      hibernate:
-        SQL=DEBUG:
-
-    springframework:
-        testloglevel=TRACE:
+server:
+  error:
+    whitelabel:
+      enabled: true
+      include-stacktrace: true
+      include-message: true

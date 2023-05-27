@@ -22,7 +22,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public CustomerDto updateCustomer(@PathVariable Long id, @RequestBody CustomerCreationUpdationRequest customerCreationUpdationRequest) {
+    public CustomerDto updateCustomer(@PathVariable Long id, @RequestBody @Validated CustomerCreationUpdationRequest customerCreationUpdationRequest) {
         return customerService.updateCustomer(id, customerCreationUpdationRequest);
     }
 

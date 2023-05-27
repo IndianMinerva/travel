@@ -53,9 +53,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.26'
 }
 
-group = 'com.example'
+group = 'com.example.travel'
 version = '0.0.1-SNAPSHOT'
-description = 'spring-boot-testing-tips-and-tricks'
+description = 'A coding challenge'
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 publishing {

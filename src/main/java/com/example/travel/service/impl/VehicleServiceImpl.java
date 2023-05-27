@@ -69,7 +69,7 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicleRepository
                 .findById(id)
                 .map(VehicleMapper::toDto)
-                .orElseThrow(() -> new VehicleNotFoundException("Vehicle with the id could not be found"));
+                .orElseThrow(() -> new VehicleNotFoundException("Vehicle with the id " + id + " could not be found"));
     }
 
     @Override

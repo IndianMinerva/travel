@@ -44,7 +44,7 @@ public class ContractServiceImpl implements ContractService {
     public ContractDto getContractById(Long id) {
         return ContractMapper.toDto(contractRepository
                 .findById(id)
-                .orElseThrow(() -> new ContractNotFoundException("Contract could not be found"))
+                .orElseThrow(() -> new ContractNotFoundException("Contract with the id " + id + " could not be found"))
         );
     }
 
@@ -80,7 +80,8 @@ public class ContractServiceImpl implements ContractService {
     @Transactional
     public ContractDto createContract(ContractCreationUpdationRequest contractCreationUpdationRequest) {
         Optional<Customer> customerOptional = customerRepository.findById(contractCreationUpdationRequest.getCustomerId());
-        Customer customer = customerOptional.orElseThrow(() -> new CustomerNotFoundException("Unknown customer"));
+        Customer customer = customerOptional.orElseThrow(() -> new CustomerNotFoundException("Customer with the Id "
+                + contractCreationUpdationRequest.getCustomerId() + " could not be found"));
 
         List<Vehicle> vehicles = getVehicles(contractCreationUpdationRequest);
         List<Vehicle> availableVehicles = getAvailableVehicles(vehicles);

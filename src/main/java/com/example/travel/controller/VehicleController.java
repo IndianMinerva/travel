@@ -34,4 +34,9 @@ public class VehicleController {
     public List<VehicleDto> getVehicles() {
         return vehicleService.getAllVehicles();
     }
+
+    @GetMapping("/available")
+    public List<VehicleDto> getAvailableVehicles() {
+        return vehicleService.getAvailableVehicles();
+    }
 }

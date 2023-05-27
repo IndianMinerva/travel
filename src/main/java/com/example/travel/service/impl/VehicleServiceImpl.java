@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
@@ -75,5 +76,13 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public List<VehicleDto> getAllVehicles() {
         return vehicleRepository.findAll().stream().map(VehicleMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<VehicleDto> getAvailableVehicles() {
+        return StreamSupport
+                .stream(vehicleRepository.findByContractNull().spliterator(), false)
+                .map(VehicleMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

@@ -52,10 +52,20 @@ public class ContractServiceImpl implements ContractService {
 
         Customer customer = customerRepository
                 .findById(contractCreationRequest.getCustomerId())
-                .orElseThrow(() -> new CustomerNotFoundException("Customer Not found. id: " + contractCreationRequest.getCustomerId()));
+                .orElseThrow(() -> new CustomerNotFoundException("Customer Not found. id: "
+                        + contractCreationRequest.getCustomerId()));
+
+        Contract contract = Contract
+                .builder()
+                .id(id)
+                .rate(contractCreationRequest.getRate())
+                .customer(customer)
+                .vehicles(vehicles)
+                .build();
+        vehicles.forEach(vehicle -> vehicle.setContract(contract));
 
         ContractDto contractDto = ContractMapper
-                .toDto(contractRepository.save(Contract.builder().rate(contractCreationRequest.getRate()).customer(customer).vehicles(vehicles).build()));
+                .toDto(contractRepository.save(contract));
         contractDto.setUnavailableVehicles(unavailable);
 
         return contractDto;
@@ -69,9 +79,9 @@ public class ContractServiceImpl implements ContractService {
         List<Vehicle> vehicles = getVehicles(contractCreationRequest);
         List<Vehicle> unavailable = getUnavailableVehicles(vehicles);
         Contract contract = Contract.builder().customer(customer).vehicles(vehicles).rate(contractCreationRequest.getRate()).build();
+        vehicles.forEach(vehicle -> vehicle.setContract(contract));
         ContractDto contractDto = ContractMapper.toDto(contractRepository.save(contract));
         contractDto.setUnavailableVehicles(unavailable);
-
         return ContractMapper.toDto(contract);
     }
 

@@ -1,9 +1,6 @@
 package com.example.travel.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -29,6 +26,7 @@ public class Vehicle {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "contract_id", referencedColumnName = "id")
+    @Setter
     private Contract contract;
 
 

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
-    Iterable<Vehicle> findByCustomerNull();
+    Iterable<Vehicle> findByContractNull();
 }

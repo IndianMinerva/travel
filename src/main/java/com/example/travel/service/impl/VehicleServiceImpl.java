@@ -81,7 +81,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public List<VehicleDto> getAvailableVehicles() {
         return StreamSupport
-                .stream(vehicleRepository.findByCustomerNull().spliterator(), false)
+                .stream(vehicleRepository.findByContractNull().spliterator(), false)
                 .map(VehicleMapper::toDto)
                 .collect(Collectors.toList());
     }

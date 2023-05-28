@@ -13,6 +13,7 @@
 - The example customer with the customer's DOB in the format **dd.MM.yyyy** could be provided right it failed until the user reads the feedback and passes the date in the right format.
 - More controller tests cases could be written -especially regarding the data validations.
 - Search API for customers could be provided and customers could be made unique (right now firstName, lastName, DOB is **NOT** the unique key)
+- Searches for vehicles, customers and contracts should be paginated.
 
 ##### Running the project
 1. After checking out the project, run wither of the commands `sh run_gradle.sh` or `sh run_mvn.sh`.

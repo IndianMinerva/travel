@@ -2,7 +2,6 @@ package com.example.travel.service;
 
 import com.example.travel.dto.ModelDto;
 import com.example.travel.repository.ModelRepository;
-import com.example.travel.repository.VehicleRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,12 +23,8 @@ public class ModelServiceTest {
     @Autowired
     private ModelRepository modelRepository;
 
-    @Autowired
-    VehicleRepository vehicleRepository;
-
     @BeforeEach
     public void beforeEach() {
-        vehicleRepository.deleteAll();
         modelRepository.deleteAll();
     }
 

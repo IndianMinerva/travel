@@ -2,7 +2,9 @@ package com.example.travel.service;
 
 import com.example.travel.dto.BrandDto;
 import com.example.travel.repository.BrandRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +29,12 @@ public class BrandServiceTest {
     @Autowired
     private BrandRepository brandRepository;
 
+    @BeforeEach
+    @AfterEach
+    public void cleanUp() {
+        brandRepository.deleteAll();
+    }
+
     @Test
     public void givenBrands_should_returnTheBrands() {
         //Given
@@ -38,7 +46,7 @@ public class BrandServiceTest {
 
         //then
         assertEquals(2, brands.size());
-        Assertions.assertTrue(brands.stream().map(BrandDto::getName).collect(Collectors.toList()).containsAll(List.of("BMW", "Audi")));
+        Assertions.assertTrue(brands.stream().map(BrandDto::getName).collect(Collectors.toList()).containsAll(List.of("BMW", "AUDI")));
         brandRepository.deleteAll();
     }
 

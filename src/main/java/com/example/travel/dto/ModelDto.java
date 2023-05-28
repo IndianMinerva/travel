@@ -16,4 +16,8 @@ public class ModelDto {
 
     @NotEmpty(message = "Model name cannot be null or empty")
     private String name;
+
+    public String getName() {
+        return name.toUpperCase();
+    }
 }

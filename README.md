@@ -14,10 +14,16 @@
 - More controller tests cases could be written -especially regarding the data validations.
 - Search API for customers could be provided and customers could be made unique (right now firstName, lastName, DOB is **NOT** the unique key)
 - Searches for vehicles, customers and contracts should be paginated.
+- Perhaps using hibernate would have made things easier. I chose JPA because I could not find Hibernate in the job description or in the skills required.
 
-##### Running the project
-1. After checking out the project, run wither of the commands `sh run_gradle.sh` or `sh run_mvn.sh`.
+##### Things to cry about and the learnings
+- I spent more time with configuration (finding the compatible spring-boot version for Java11, finding the right swagger and flyway versions for the spring-boot version) ensuring that the app starts only after the database is ready (it turns out that depends_on alone is not enough for MySQL but healthcheck too is needed)
+
+#### Running the project
+1. After cloning the code, run either of the commands `sh run_gradle.sh` or `sh run_mvn.sh`.
 2. Use `sh stop.sh` to stop the application.
-##### Important links:
+
+
+#### Important links:
 - [Swagger-ui](http://localhost:8080/swagger-ui.html)
 - [Open-API](http://localhost:8080/v3/api-docs/)

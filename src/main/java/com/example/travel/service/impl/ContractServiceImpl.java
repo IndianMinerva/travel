@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.toList;
 
@@ -37,9 +36,7 @@ public class ContractServiceImpl implements ContractService {
     public List<ContractDto> getAllContracts() {
         return contractRepository.findAll().stream().map(ContractMapper::toDto).collect(toList());
     }
-
-    private Predicate<Vehicle> vehicleAvailabilityPredicate = (vehicle -> vehicle.getContract() == null);
-
+    
     @Override
     public ContractDto getContractById(Long id) {
         return ContractMapper.toDto(contractRepository
@@ -52,8 +49,8 @@ public class ContractServiceImpl implements ContractService {
     @Transactional
     public ContractDto updateContract(Long id, ContractCreationUpdationRequest contractCreationUpdationRequest) {
         List<Vehicle> vehicles = getVehicles(contractCreationUpdationRequest);
-        List<Vehicle> availableVehicles = getAvailableVehicles(vehicles);
-        List<Vehicle> unavailableVehicles = getUnavailableVehicles(vehicles);
+        List<Vehicle> availableVehicles = getAvailableVehicles(vehicles, id);
+        List<Vehicle> unavailableVehicles = getUnavailableVehicles(vehicles, id);
 
         Customer customer = customerRepository
                 .findById(contractCreationUpdationRequest.getCustomerId())
@@ -84,8 +81,8 @@ public class ContractServiceImpl implements ContractService {
                 + contractCreationUpdationRequest.getCustomerId() + " could not be found"));
 
         List<Vehicle> vehicles = getVehicles(contractCreationUpdationRequest);
-        List<Vehicle> availableVehicles = getAvailableVehicles(vehicles);
-        List<Vehicle> unavailableVehicles = getUnavailableVehicles(vehicles);
+        List<Vehicle> availableVehicles = getAvailableVehicles(vehicles, null);
+        List<Vehicle> unavailableVehicles = getUnavailableVehicles(vehicles, null);
 
         Contract contract = Contract.builder().customer(customer).vehicles(availableVehicles).rate(contractCreationUpdationRequest.getRate()).build();
         availableVehicles.forEach(vehicle -> vehicle.setContract(contract));
@@ -98,11 +95,11 @@ public class ContractServiceImpl implements ContractService {
         return vehicleRepository.findAllById(contractCreationUpdationRequest.getVehicleIds());
     }
 
-    private List<Vehicle> getAvailableVehicles(List<Vehicle> vehicles) {
-        return vehicles.stream().filter(vehicleAvailabilityPredicate).collect(toList());
+    private List<Vehicle> getAvailableVehicles(List<Vehicle> vehicles, Long contractId) {
+        return vehicles.stream().filter(vehicle -> vehicle.getContract() == null || vehicle.getContract().getId() == contractId).collect(toList());
     }
 
-    private List<Vehicle> getUnavailableVehicles(List<Vehicle> vehicles) {
-        return vehicles.stream().filter(vehicleAvailabilityPredicate.negate()).collect(toList());
+    private List<Vehicle> getUnavailableVehicles(List<Vehicle> vehicles, Long contractId) {
+        return vehicles.stream().filter(vehicle -> vehicle.getContract() != null && vehicle.getContract().getId() != contractId).collect(toList());
     }
 }

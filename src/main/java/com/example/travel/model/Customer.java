@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +14,6 @@ import java.util.Date;
 @Getter
 @Entity
 @Builder
-@Audited
 @Table(name = "CUSTOMER")
 public class Customer {
     @Id

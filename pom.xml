@@ -72,10 +72,10 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.7.0</version>
         </dependency>
-        <dependency>  <groupId>org.hibernate</groupId>
+        <!--<dependency>  <groupId>org.hibernate</groupId>
             <artifactId>hibernate-envers</artifactId>
             <version>4.0.1.Final</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>

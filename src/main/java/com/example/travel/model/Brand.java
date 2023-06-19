@@ -3,24 +3,19 @@ package com.example.travel.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.envers.Audited;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Entity
-@Audited
 @Table(name = "BRAND")
 public class Brand {
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
 
     @Column(unique = true)
     private String name;

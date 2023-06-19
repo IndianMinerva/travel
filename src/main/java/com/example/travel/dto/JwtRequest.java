@@ -1,4 +1,4 @@
-package com.example.travel.model;
+package com.example.travel.dto;
 
 import java.io.Serializable;
 

@@ -1,9 +1,7 @@
 package com.example.travel.controller;
 
-import java.util.Objects;
-
-import com.example.travel.model.JwtRequest;
-import com.example.travel.model.JwtResponse;
+import com.example.travel.dto.JwtRequest;
+import com.example.travel.dto.JwtResponse;
 import com.example.travel.service.JwtUserDetailsService;
 import com.example.travel.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package com.example.travel.model;
 
 import lombok.*;
-import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Builder
-@Audited
 public class Contract {
 
     @Id

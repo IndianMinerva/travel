@@ -23,6 +23,8 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+jwt:
+  secret: javainuse
 swagger:
   host:
     url=http://localhost:8080:

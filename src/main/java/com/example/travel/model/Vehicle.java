@@ -1,6 +1,7 @@
 package com.example.travel.model;
 
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Builder
+@Audited
 public class Vehicle {
 
     @Id

@@ -3,6 +3,7 @@ package com.example.travel.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Getter
 @Entity
+@Audited
 @Table(name = "BRAND")
 public class Brand {
 

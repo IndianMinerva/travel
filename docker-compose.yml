@@ -14,7 +14,6 @@ services:
       test: "mysqladmin -u root -ppassword ping"
       interval: 10s
       retries: 10
-
   my-app:
     image: 'travel:latest'
     ports:
@@ -22,5 +21,18 @@ services:
     environment:
         SPRING_PROFILES_ACTIVE: test
     depends_on:
-      mysqldb:
-        condition: service_healthy
+      - mysqldb
+  grafana:
+    image: grafana/grafana
+    container_name: grafana-server
+    restart: always
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=
+    ports:
+      - '3000:3000'
+    #volumes:
+      #- grafana_data:/var/lib/grafana
+  #volumes:
+    #grafana_data: { }

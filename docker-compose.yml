@@ -24,3 +24,13 @@ services:
     depends_on:
       mysqldb:
         condition: service_healthy
+  prometheus:
+    image: prom/prometheus
+    container_name: travel-prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    depends_on:
+      my-app:
+        condition: service_started

@@ -32,3 +32,12 @@ server:
     include-binding-errors: always
     include-stacktrace: never
     include-exception: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

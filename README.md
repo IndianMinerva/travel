@@ -25,8 +25,9 @@
 
 
 #### Important links:
-- [Swagger-ui](http://localhost:8080/swagger-ui.html)
-- [Open-API](http://localhost:8080/v3/api-docs/)
+- [baeldung-spring3-opendoc](https://www.baeldung.com/spring-rest-openapi-documentation)
+- [Swagger-ui](http://localhost:8080/swagger-ui/index.html)
+- [Open-API](http://localhost:8080/v3/api-docs)
 - [Prometheus](http://localhost:9090)
 - [hibernate-envers](https://nirajsonawane.github.io/2021/04/25/spring-boot-with-hibernate-envers/)
 - [hibernate-envers](https://www.baeldung.com/database-auditing-jpa)

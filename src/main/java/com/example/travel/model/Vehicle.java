@@ -1,8 +1,7 @@
 package com.example.travel.model;
 
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor

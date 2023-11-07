@@ -12,10 +12,10 @@ import com.example.travel.repository.ContractRepository;
 import com.example.travel.repository.CustomerRepository;
 import com.example.travel.repository.VehicleRepository;
 import com.example.travel.service.ContractService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 

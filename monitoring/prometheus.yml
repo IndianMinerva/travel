@@ -1,21 +1,9 @@
 global:
-  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  scrape_interval: 1s
+  scrape_timeout: 1s
 
-  # Attach these labels to any time series or alerts when communicating with
-  # external systems (federation, remote storage, Alertmanager).
-  external_labels:
-    monitor: 'codelab-monitor'
-
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
 scrape_configs:
-  - job_name: 'prometheus'
-    scrape_interval: 5s
+  - job_name: tailor-scrape
+    metrics_path: /actuator/prometheus
     static_configs:
-      - targets: ['localhost:9090']
-
-  - job_name:       'travel-app'
-    scrape_interval: 5s
-    metrics_path: /prometheus
-    static_configs:
-      - targets: ['localhost:8080']
+      - targets: ['host.docker.internal:4001']

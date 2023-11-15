@@ -3,9 +3,9 @@ CREATE TABLE vehicle(
 	version INT,
 	brand_id INT,
 	model_id INT,
-	model_year INT(4),
-	vin VARCHAR(10) NULL UNIQUE,
-	price DOUBLE,
+	model_year INT,
+	vin VARCHAR NULL UNIQUE,
+	price DOUBLE PRECISION,
 	contract_id INT NULL,
 	CONSTRAINT fk_vehicle_bland_brand_id FOREIGN KEY(brand_id) REFERENCES brand(id),
 	CONSTRAINT fk_vehicle_model_model_id FOREIGN KEY(model_id) REFERENCES model(id),
@@ -13,5 +13,5 @@ CREATE TABLE vehicle(
 );
 
 
-CREATE TABLE vehicle_seq(next_val INT);
+CREATE TABLE IF NOT EXISTS vehicle_seq(next_val INT);
 insert into vehicle_seq values(1);

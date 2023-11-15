@@ -6,5 +6,5 @@ CREATE TABLE customer(
 	dob DATE
 );
 
-CREATE TABLE customer_seq(next_val INT);
+CREATE TABLE IF NOT EXISTS customer_seq(next_val INT);
 insert into customer_seq values(1);

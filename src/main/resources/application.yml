@@ -1,18 +1,19 @@
 spring:
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://mysqldb:3306/travel
-    username: root
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://PostgreSQL:5432/postgres
+    username: postgres
     password: password
   jpa:
-    #hibernate.ddl-auto: update
-    #generate-ddl: true
-    show-sql: true
+    open-in-view: false
+#    hibernate.ddl-auto: update
+#    generate-ddl: true
+#    show-sql: true
   flyway:
-    user: root
+    user: postgres
     password: password
     schemas: travel
-    url: jdbc:mysql://mysqldb:3306/travel
+    url: jdbc:postgresql://PostgreSQL:5432/postgres
     locations: classpath:db/migration
     baseline-on-migrate: true
     create-schemas: true

@@ -1,29 +1,26 @@
 version: '3'
 services:
-  mysqldb:
-    image: mysql:8
-    restart: unless-stopped
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=travel
-      - MYSQL_USER=flyway
-      - MYSQL_PASSWORD=flyway
+  PostgreSQL:
+    image: postgres
     ports:
-      - 3306:3306
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
     healthcheck:
-      test: "mysqladmin -u root -ppassword ping"
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 10s
-      retries: 10
-
+      timeout: 5s
+      retries: 5
   my-app:
     image: 'travel:latest'
     ports:
       - '8080:8080'
-    environment:
-      SPRING_PROFILES_ACTIVE: test
     depends_on:
-      mysqldb:
+      PostgreSQL:
         condition: service_healthy
+
 #  prometheus:
 #    image: prom/prometheus
 #    container_name: travel-prometheus

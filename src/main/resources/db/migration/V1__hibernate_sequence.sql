@@ -1,2 +1,2 @@
-CREATE TABLE travel.hibernate_sequence(next_val BIGINT);
-insert into travel.hibernate_sequence values(1);
+CREATE TABLE hibernate_sequence(next_val BIGINT);
+insert into hibernate_sequence values(1);

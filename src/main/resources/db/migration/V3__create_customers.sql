@@ -7,4 +7,3 @@ CREATE TABLE IF NOT EXISTS customer(
 );
 
 CREATE SEQUENCE IF NOT EXISTS customer_seq INCREMENT BY 50;
---insert into customer_seq values(1);

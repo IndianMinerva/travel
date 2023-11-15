@@ -6,18 +6,17 @@ spring:
     password: password
   jpa:
     open-in-view: false
-#    hibernate.ddl-auto: update
-#    generate-ddl: true
-#    show-sql: true
-  flyway:
-    user: postgres
-    password: password
-#    schemas: travel
-    url: jdbc:postgresql://PostgreSQL:5432/postgres
-    locations: classpath:db/migration
-    baseline-on-migrate: true
-    create-schemas: true
-    enabled: true
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+#  flyway:
+#    user: postgres
+#    password: password
+#    url: jdbc:postgresql://PostgreSQL:5432/postgres
+#    locations: classpath:db/migration
+#    baseline-on-migrate: true
+#    create-schemas: true
+#    enabled: true
   logging:
     level:
       root: debug

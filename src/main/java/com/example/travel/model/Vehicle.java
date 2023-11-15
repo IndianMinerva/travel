@@ -11,8 +11,7 @@ import lombok.*;
 public class Vehicle {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vehicle_generator")
-    @SequenceGenerator(name= "vehicle_generator", sequenceName = "vehicle_seq", allocationSize = 1)
+    @GeneratedValue
     private Long id;
 
     @Version

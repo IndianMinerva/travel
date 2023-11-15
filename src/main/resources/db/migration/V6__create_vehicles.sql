@@ -1,4 +1,4 @@
-CREATE TABLE vehicle(
+CREATE TABLE IF NOT EXISTS vehicle(
 	id INT PRIMARY KEY,
 	version INT,
 	brand_id INT,
@@ -13,5 +13,5 @@ CREATE TABLE vehicle(
 );
 
 
-CREATE SEQUENCE IF NOT EXISTS vehicle_seq;
+CREATE SEQUENCE IF NOT EXISTS vehicle_seq INCREMENT BY 50;
 --insert into vehicle_seq values(1);

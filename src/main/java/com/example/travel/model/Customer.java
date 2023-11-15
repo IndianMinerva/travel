@@ -17,8 +17,7 @@ import java.util.Date;
 @Table(name = "CUSTOMER")
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_generator")
-    @SequenceGenerator(name= "customer_generator", sequenceName = "customer_seq", allocationSize = 1)
+    @GeneratedValue
     private Long id;
 
     @Version

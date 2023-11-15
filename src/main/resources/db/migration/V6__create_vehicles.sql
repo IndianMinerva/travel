@@ -13,5 +13,5 @@ CREATE TABLE vehicle(
 );
 
 
-CREATE TABLE IF NOT EXISTS vehicle_seq(next_val INT);
-insert into vehicle_seq values(1);
+CREATE SEQUENCE IF NOT EXISTS vehicle_seq;
+--insert into vehicle_seq values(1);

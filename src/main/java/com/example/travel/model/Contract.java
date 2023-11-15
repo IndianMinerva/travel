@@ -13,7 +13,8 @@ import java.util.List;
 public class Contract {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_generator")
+    @SequenceGenerator(name= "contract_generator", sequenceName = "contract_seq", allocationSize = 1)
     private Long id;
 
     @Version

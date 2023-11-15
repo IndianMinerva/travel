@@ -6,5 +6,5 @@ create table contract(
     CONSTRAINT fk_contract_customer_customer_id FOREIGN KEY(customer_id) REFERENCES customer(id)
 );
 
-CREATE TABLE IF NOT EXISTS contract_seq(next_val INT);
-insert into contract_seq values(1);
+CREATE SEQUENCE IF NOT EXISTS contract_seq;
+--insert into contract_seq values(1);

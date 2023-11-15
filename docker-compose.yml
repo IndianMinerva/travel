@@ -20,17 +20,19 @@ services:
     depends_on:
       PostgreSQL:
         condition: service_healthy
-
 #  prometheus:
-#    image: prom/prometheus
-#    container_name: travel-prometheus
+#    image: prom/prometheus:v2.30.3
 #    volumes:
 #      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+#      - prometheus-data:/monitoring
 #    ports:
-#      - 9090:9090
+#      - "9090:9090"
+#    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
 #    depends_on:
 #      my-app:
 #        condition: service_started
+#    networks:
+#      - my-app
 #  grafana:
 #    image: grafana/grafana
 #    container_name: grafana

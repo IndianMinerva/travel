@@ -1,2 +1,2 @@
-CREATE TABLE hibernate_sequence(next_val BIGINT);
-insert into hibernate_sequence values(1);
+CREATE SEQUENCE hibernate_sequence;
+--insert into hibernate_sequence values(1);

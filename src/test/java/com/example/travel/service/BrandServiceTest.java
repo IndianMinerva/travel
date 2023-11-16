@@ -8,6 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,13 +20,13 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-//@Testcontainers
+@Testcontainers
 @SpringBootTest
 public class BrandServiceTest {
 
-    /*@Container
-    public static MySQLContainer mySQLContainer = new MySQLContainer<>(DockerImageName.parse("mysql:8.0-debian"))
-            .withReuse(true);*/
+//    @Container
+//    public static PostgreSQLContainer mySQLContainer = (PostgreSQLContainer) new PostgreSQLContainer(DockerImageName.parse("postgres:latest"))
+//            .withReuse(true);
     @Autowired
     private BrandService brandService;
 

@@ -36,6 +36,12 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
+            <version>10.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>10.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -90,12 +96,12 @@
             <version>1.18.26</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.flywaydb.flyway-test-extensions</groupId>
             <artifactId>flyway-spring-test</artifactId>
             <version>5.0.0</version>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -119,14 +125,9 @@
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>mysql</artifactId>
-            <version>1.18.1</version>
+            <artifactId>postgresql</artifactId>
+            <version>1.19.2</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>2.1.214</version>
         </dependency>
     </dependencies>
     <build>
@@ -147,7 +148,7 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>7.0.0</version>
+                <version>10.0.1</version>
                 <configuration>
                     <url>jdbc:postgresql://localhost:5432/postgres</url>
                     <user>postgres</user>

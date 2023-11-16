@@ -1,16 +1,15 @@
 spring:
+  sql:
+    init:
+      mode: always
   datasource:
-    url: 'jdbc:h2:mem:testdb'
-    driverClassName: org.h2.Driver
-    username: sa
+    url: 'jdbc:tc:postgresql:///db'
+    username: username
     password: password
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-
   flyway:
-    enabled: false
+    enabled: true
 jpa:
   hibernate:
     ddl-auto: update
-    generate-ddl: true
-    show-sql: true
+#    generate-ddl: true
+#    show-sql: true

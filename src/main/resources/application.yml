@@ -12,7 +12,6 @@ spring:
   flyway:
     user: postgres
     password: password
-#    schemas: travel
     url: jdbc:postgresql://PostgreSQL:5432/postgres
     locations: classpath:db/migration
     baseline-on-migrate: true
